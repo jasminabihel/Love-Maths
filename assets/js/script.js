@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     runGame("addition");
+    runGame("multiply");
 
 });
 
@@ -23,13 +24,15 @@ function runGame(gameType) {
 
     if (gameType === "addition") {
         dispalyAdditionQuestion(num1, num2);
+
+    } else if (gameType === "multiply") {
+        dispalyMultiplyQuestion(num1, num2);
+
     } else {
         alert(`Unknown game type: ${gameType}`);
         throw `Unknown game type: ${gameType}. Aborting!`;
     }
-
 }
-
 function checkAnswer() {
 
     let userAnswer = parseInt(document.getElementById("answer-box").value);
@@ -56,15 +59,18 @@ function calculateCorrectAnswer() {
 
     if (operator === "+") {
         return [operand1 + operand2, "addition"];
-    } else {
+
+    } else if (operator === "x") {
+        return [operand1 * operand2, "multiply"];
+    }
+    else {
         alert(`Unimplemented operator ${operator}`);
         throw `Unimplemented operator ${operator}. Aborting!`;
     }
-
 }
 
 function incrementScore() {
-    
+
     let oldScore = parseInt(document.getElementById("score").innerText);
     document.getElementById("score").innerText = ++oldScore;
 
@@ -88,6 +94,9 @@ function dispalySubtractQuestion() {
 
 }
 
-function dispalyMultiplyQuestion() {
+function dispalyMultiplyQuestion(operand1,operand2) {
 
+    document.getElementById('operand1').textContent = operand1;
+    document.getElementById('operand2').textContent = operand2;
+    document.getElementById('operator').textContent = "x";
 }
